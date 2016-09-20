@@ -4,13 +4,31 @@
 		<legend><?php echo __('買ったものを編集'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('cat_id');
-		echo $this->Form->input('detail_id');
-		echo $this->Form->input('date');
-		echo $this->Form->input('amount');
-		echo $this->Form->input('unit');
-		echo $this->Form->input('price');
-		echo $this->Form->input('store');
+		echo $this->Form->input('cat_id', array(
+			'label' => '種別'
+		));
+		echo $this->Form->input('detail_id', array(
+			'label' => '買ったもの（<a href="../details/add" target="_blank">新しく追加</a>）'
+		));
+		echo $this->Form->input('date', array(
+			'label' => '買った日'
+		));
+		echo $this->Form->input('amount', array(
+			'label' => '数量',
+			'class' => 'input_s'
+		));
+		echo $this->Form->input('unit', array(
+			'label' => '単位',
+			'class' => 'input_s'
+		));
+		echo $this->Form->input('price', array(
+			'label' => '価格',
+			'class' => 'input_s'
+		));
+		echo $this->Form->input('store', array(
+			'label' => '買ったお店',
+			'class' => 'input_l'
+		));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('登録する')); ?>

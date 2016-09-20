@@ -15,7 +15,10 @@ class StuffsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session', 'Flash');
+	public $components = array('Paginator' => array(
+        //'limit' => 20,
+        'order' => array('Stuff.date' => 'asc')
+    ), 'Session', 'Flash');
 
 /**
  * index method
@@ -34,14 +37,11 @@ class StuffsController extends AppController {
             $modified = substr($value['Stuff']['modified'], 0, 10);
 
             //if it is already modified today, do not modify any more.
-            if( strtotime($today)<strtotime($modified) || !$value['Stuff']['pastdates']){
-                $pastDates = $this->Stuff->pastDates($value);
-                $this->log('past: ' . $pastDates, 'debug');
-            } else {
-                $this->log('modified.', 'debug');
+            if( strtotime($today)>strtotime($modified) || !$value['Stuff']['pastdates']){
+                $result = $this->Stuff->pastDates($value);
+                //$this->log('past: ' . $pastDates, 'debug');
+                $this->log('result: ' . $result, 'debug');
             }
-            //$this->log('modified: '. strtotime($modified) .'|today: '. strtotime($today), 'debug');
-
         }
 
         $this->set('stuffs', $this->Paginator->paginate());
@@ -71,16 +71,6 @@ class StuffsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Stuff->create();
 			if ($this->Stuff->save($this->request->data)) {
-
-			    //9/16 requestの日付を取得したいよー
-                $this->log('data: '. $this->request->data ,'debug');
-/*
-			    if(isset( $this->request->data['Stuff']['date'] )) {
-                    $pastDays = $this->Stuff-> pastDays( $this->request->data['Stuff']['date'] );
-                } else {
-                    $pastDays = NULL;
-                }*/
-
 				$this->Flash->success(__('The stuff has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -104,11 +94,29 @@ class StuffsController extends AppController {
 			throw new NotFoundException(__('Invalid stuff'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+            //for compare date and edited date
+            $sort = array_fill_keys(array('year', 'month', 'day'), null);
+            $array = array_merge($sort, $this->request->data['Stuff']['date']);
+            $newDate = implode('-', $array);
+
+            $data = $this->Stuff->find('first', array(
+                'conditions' => array('Stuff.id' => $id)
+            ));
+
+            //$this->log('(edit)thisDate: '. $data['Stuff']['date'], 'debug');
+            //$this->log('(edit)newDate: '. $newDate, 'debug');
+
+            if($newDate !== $data['Stuff']['date']) {//日付が変更された
+                $data['Stuff']['date'] = $newDate;
+                $result = $this->Stuff->pastDates($data);
+            }
+
 			if ($this->Stuff->save($this->request->data)) {
-				$this->Flash->success(__('The stuff has been saved.'));
+				$this->Flash->success(__('買ったもの を保存しました。'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The stuff could not be saved. Please, try again.'));
+				$this->Flash->error(__('買ったもの を保存できませんでした。再度操作をお願いします。'));
 			}
 		} else {
 			$options = array('conditions' => array('Stuff.' . $this->Stuff->primaryKey => $id));

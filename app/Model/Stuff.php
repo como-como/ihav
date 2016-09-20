@@ -67,22 +67,25 @@ class Stuff extends AppModel {
 
 /**
  * How many days did it pass?
- * return: past days
+ *
+ * if it was 'modified' before 'today', then update DB.
+ * return: result
  */
     public function pastDates($data) {
         $today = date('y-m-d');
         $gotDate = $data['Stuff']['date'];
-        $this->log('today: '. $today . 'gotDate: ' .$gotDate ,'debug');
+
+        //$this->log('(pastDates) today: '. $today . 'gotDate: ' .$gotDate ,'debug');
 
         $past = (strtotime($today)-strtotime($gotDate)) / 60 / 60 / 24;
         if($past >= 0) {
             $data['Stuff']['pastdates'] = $past;
         } else {
-            $data['Stuff']['pastdates'] = '-';
+            $data['Stuff']['pastdates'] = '';
         }
         $data['Stuff']['modified'] = date('y-m-d H:i:s');
 
-        $this->log('id: '. $data['Stuff']['id']. '| past: '. $past ,'debug');
+        //$this->log('(pastDates) id: '. $data['Stuff']['id']. '| past: '. $past ,'debug');
 
         // save just this record
         $result = $this->save($data);
@@ -91,4 +94,5 @@ class Stuff extends AppModel {
         }
         return $result;
     }
+
 }
