@@ -25,6 +25,20 @@ class StuffsController extends AppController {
 	public function index() {
 		$this->Stuff->recursive = 0;
 		$this->set('stuffs', $this->Paginator->paginate());
+
+        $data = $this->Stuff->find('all');
+        //$this->log('data: '. print_r($data) ,'debug');
+
+        //日付を取得
+        foreach($data as $key => $value){
+            $pastDates = $this->Stuff->pastDates($value);
+            $this->log('past: '. $pastDates, 'debug');
+            //$this->log('Stuff: '. $key .'|'. $value, 'debug');
+        }
+        $rel = $_GET['reload'];
+        if ($rel == 'true') {
+            header("Location: " . $_SERVER['PHP_SELF']);
+        }
 	}
 
 /**
@@ -51,6 +65,16 @@ class StuffsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Stuff->create();
 			if ($this->Stuff->save($this->request->data)) {
+
+			    //9/16 requestの日付を取得したいよー
+                $this->log('data: '. $this->request->data ,'debug');
+/*
+			    if(isset( $this->request->data['Stuff']['date'] )) {
+                    $pastDays = $this->Stuff-> pastDays( $this->request->data['Stuff']['date'] );
+                } else {
+                    $pastDays = NULL;
+                }*/
+
 				$this->Flash->success(__('The stuff has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {

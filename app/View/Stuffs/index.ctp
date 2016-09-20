@@ -8,6 +8,7 @@
 			<th><?php echo $this->Paginator->sort('amount','数'); ?></th>
 			<th><?php echo $this->Paginator->sort('unit','単位'); ?></th>
 			<th><?php echo $this->Paginator->sort('date','買った日'); ?></th>
+			<th><?php echo $this->Paginator->sort('pastdates','経過日数'); ?></th>
 			<!--<th><?php //echo $this->Paginator->sort('price','価格'); ?></th>-->
 			<!--<th><?php //echo $this->Paginator->sort('store',''); ?></th>-->
 			<th class="actions"><?php echo __(''); ?></th>
@@ -25,6 +26,7 @@
 		<td><?php echo h($stuff['Stuff']['amount']); ?>&nbsp;</td>
 		<td><?php echo h($stuff['Stuff']['unit']); ?>&nbsp;</td>
 		<td><?php echo h($stuff['Stuff']['date']) ?>&nbsp;</td>
+		<td><?php echo h($stuff['Stuff']['pastdates']) ?>&nbsp;</td>
 		<!--<td><?php //echo h($stuff['Stuff']['price']); ?>&nbsp;</td>-->
 		<!--<td><?php //echo h($stuff['Stuff']['store']); ?>&nbsp;</td>-->
 		<td class="actions">
