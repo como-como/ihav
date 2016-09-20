@@ -80,17 +80,9 @@ class Stuff extends AppModel {
         } else {
             $data['Stuff']['pastdates'] = '-';
         }
+        $data['Stuff']['modified'] = date('y-m-d H:i:s');
 
         $this->log('id: '. $data['Stuff']['id']. '| past: '. $past ,'debug');
-
-        // find the date of current Record
-        /*
-        $currentRecord = $this->find('first', array(
-            'conditions' => array('Stuff.id = ' => $data['id'])
-        ));
-        $currentRecord['Stuff']['pastDates'] = $past;
-        */
-        //$this->log('current: '.$currentRecord ,'debug');
 
         // save just this record
         $result = $this->save($data);

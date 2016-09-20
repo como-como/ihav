@@ -24,21 +24,27 @@ class StuffsController extends AppController {
  */
 	public function index() {
 		$this->Stuff->recursive = 0;
-		$this->set('stuffs', $this->Paginator->paginate());
 
         $data = $this->Stuff->find('all');
         //$this->log('data: '. print_r($data) ,'debug');
 
-        //日付を取得
+        //update pastDates
         foreach($data as $key => $value){
-            $pastDates = $this->Stuff->pastDates($value);
-            $this->log('past: '. $pastDates, 'debug');
-            //$this->log('Stuff: '. $key .'|'. $value, 'debug');
+            $today = date('y-m-d');
+            $modified = substr($value['Stuff']['modified'], 0, 10);
+
+            //if it is already modified today, do not modify any more.
+            if( strtotime($today)<strtotime($modified) || !$value['Stuff']['pastdates']){
+                $pastDates = $this->Stuff->pastDates($value);
+                $this->log('past: ' . $pastDates, 'debug');
+            } else {
+                $this->log('modified.', 'debug');
+            }
+            //$this->log('modified: '. strtotime($modified) .'|today: '. strtotime($today), 'debug');
+
         }
-        $rel = $_GET['reload'];
-        if ($rel == 'true') {
-            header("Location: " . $_SERVER['PHP_SELF']);
-        }
+
+        $this->set('stuffs', $this->Paginator->paginate());
 	}
 
 /**

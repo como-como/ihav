@@ -15,6 +15,11 @@ body {
     font-size: 1rem;
     line-height: 1.5rem;
 }
+input, select, textarea {
+    padding: 1%;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
 a {
     text-decoration: none;
     -webkit-transition: all .25s ease-in-out;
@@ -81,6 +86,16 @@ q:after  { content: close-quote }
     margin: 0 auto;
     padding-top: 5rem;
     padding-bottom: 3rem;
+}
+
+.input_ss {
+    width: 5rem;
+}
+.input_s {
+    width: 7rem;
+}
+.input_l {
+    width: 20rem;
 }
 
 /* ------- general ------- */
