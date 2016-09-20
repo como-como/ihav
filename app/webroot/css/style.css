@@ -119,5 +119,8 @@ q:after  { content: close-quote }
 .fs-0_9rem { font-size: 0.9rem }
 .fs-1rem { font-size: 1rem }
 
+.fw-bold { font-weight: bold; }
+
 .col-red { color: #cc3333; }
+.col-yellow { color: #ffa500; }
 .col-lgray { color: #ccc; }

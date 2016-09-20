@@ -26,7 +26,21 @@
 		<td><?php echo h($stuff['Stuff']['amount']); ?>&nbsp;</td>
 		<td><?php echo h($stuff['Stuff']['unit']); ?>&nbsp;</td>
 		<td><?php echo h($stuff['Stuff']['date']) ?>&nbsp;</td>
-		<td><?php echo h($stuff['Stuff']['pastdates']) ?>&nbsp;</td>
+		<td <?php if($stuff['Stuff']['pastdates']>7) {
+			echo ' class="col-red fw-bold"';
+		} elseif ($stuff['Stuff']['pastdates']>5) {
+			echo ' class="col-yellow fw-bold"';
+		} ?>>
+			<?php
+			if($stuff['Stuff']['pastdates']>14) {
+				echo '😭 ';
+			} elseif ($stuff['Stuff']['pastdates']>7) {
+				echo '😞 ';
+			} elseif ($stuff['Stuff']['pastdates']>5) {
+				echo '😖 ';
+			}
+			echo h($stuff['Stuff']['pastdates']); ?>
+		&nbsp;</td>
 		<!--<td><?php //echo h($stuff['Stuff']['price']); ?>&nbsp;</td>-->
 		<!--<td><?php //echo h($stuff['Stuff']['store']); ?>&nbsp;</td>-->
 		<td class="actions">
