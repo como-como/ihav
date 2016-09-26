@@ -76,7 +76,7 @@ q:after  { content: close-quote }
 
 /* ------- common classes ------- */
 .ff-en {
-    font-family: 'Montez', cursive;
+    font-family: 'Leckerli One', cursive;
     letter-spacing: 0.05rem;
 }
 
@@ -86,6 +86,11 @@ q:after  { content: close-quote }
     margin: 0 auto;
     padding-top: 5rem;
     padding-bottom: 3rem;
+}
+
+.logo {
+    margin: 0.5rem 0;
+    font-size: 2rem;
 }
 
 .input_ss {
@@ -111,6 +116,11 @@ q:after  { content: close-quote }
     text-justify: distribute;
 }
 
+.d-iblock { display: inline-block; }
+
+.f-left { float: left; }
+.f-right { float: right; }
+
 .m-center { margin: 0 auto; }
 .mr-0_2rem { margin-right: 0.2rem; }
 
@@ -123,4 +133,5 @@ q:after  { content: close-quote }
 
 .col-red { color: #cc3333; }
 .col-yellow { color: #ffa500; }
+.col-green { color: #38b48b; }
 .col-lgray { color: #ccc; }

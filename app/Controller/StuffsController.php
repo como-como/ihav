@@ -21,6 +21,26 @@ class StuffsController extends AppController {
     ), 'Session', 'Flash');
 
 /**
+ * Authorize
+ */
+    public function isAuthorized($user) {
+        // 登録済ユーザーは投稿できる
+        if ($this->action === 'add') {
+            return true;
+        }
+
+        // 投稿のオーナーは編集や削除ができる
+        if (in_array($this->action, array('edit', 'delete'))) {
+            $stuffId = (int) $this->request->params['pass'][0];
+            if ($this->Post->isOwnedBy($stuffId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
+    }
+
+/**
  * index method
  *
  * @return void
@@ -40,7 +60,7 @@ class StuffsController extends AppController {
             if( strtotime($today)>strtotime($modified) || !$value['Stuff']['pastdates']){
                 $result = $this->Stuff->pastDates($value);
                 //$this->log('past: ' . $pastDates, 'debug');
-                $this->log('result: ' . $result, 'debug');
+                //$this->log('result: ' . $result, 'debug');
             }
         }
 
@@ -70,11 +90,13 @@ class StuffsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Stuff->create();
+            //ユーザ名を保存する
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id');
 			if ($this->Stuff->save($this->request->data)) {
-				$this->Flash->success(__('The stuff has been saved.'));
+				$this->Flash->success(__('買ったものを登録しました。'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Flash->error(__('The stuff could not be saved. Please, try again.'));
+				$this->Flash->error(__('買ったものを登録できませんでした。再度登録してください。'));
 			}
 		}
 		$cats = $this->Stuff->Cat->find('list');

@@ -31,4 +31,40 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    public $components = array(
+        'Flash',
+        'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'stuffs',
+                'action' => 'index'
+            ),
+            'logoutRedirect' => array(
+                'controller' => 'stuffs',
+                //'action' => 'display',
+                //'home'
+                'action' => 'index'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            ),
+            'authorize' => array('Controller')
+        )
+    );
+
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // デフォルトは拒否
+        return false;
+    }
+
+    //アカウントがなくても内容を見ることができる
+    public function beforeFilter() {
+        //$this->Auth->allow('index', 'view');
+    }
 }

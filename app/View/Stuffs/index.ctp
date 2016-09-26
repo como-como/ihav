@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-			<!--<th><?php //echo $this->Paginator->sort('cat_id'); ?></th>-->
+			<th><?php echo $this->Paginator->sort('cat_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('detail_id','買ったもの'); ?></th>
 			<th><?php echo $this->Paginator->sort('amount','数'); ?></th>
 			<th><?php echo $this->Paginator->sort('unit','単位'); ?></th>
@@ -17,27 +17,54 @@
 	<tbody>
 	<?php foreach ($stuffs as $stuff): ?>
 	<tr>
-		<!--<td>
-			<?php //echo $this->Html->link($stuff['Cat']['cat_name'], array('controller' => 'cats', 'action' => 'view', $stuff['Cat']['id'])); ?>
-		</td>-->
+		<td
+		<?php
+			//if($stuff['Cat']['cat_name']==='野菜') {
+				echo ' style="color:'. $stuff['Cat']['color'] .';"';
+			/*} else if ($stuff['Cat']['cat_name']==='肉') {
+				echo ' class="col_meat"';
+			}*/
+		?>>
+			<?php //echo $this->Html->link($stuff['Cat']['cat_name'], array('controller' => 'cats', 'action' => 'view', $stuff['Cat']['id']));
+			echo $stuff['Cat']['cat_name'];
+			?>
+		</td>
 		<td>
 			<?php echo $this->Html->link($stuff['Detail']['name'], array('controller' => 'details', 'action' => 'view', $stuff['Detail']['id'])); ?>
 		</td>
 		<td><?php echo h($stuff['Stuff']['amount']); ?>&nbsp;</td>
 		<td><?php echo h($stuff['Stuff']['unit']); ?>&nbsp;</td>
-		<td><?php echo h($stuff['Stuff']['date']) ?>&nbsp;</td>
-		<td <?php if($stuff['Stuff']['pastdates']>7) {
-			echo ' class="col-red fw-bold"';
-		} elseif ($stuff['Stuff']['pastdates']>5) {
-			echo ' class="col-yellow fw-bold"';
+		<td><?php echo h(substr(str_replace('-', '/', $stuff['Stuff']['date']), 5)) ?>&nbsp;</td>
+		<td <?php
+		// 経過日に応じて色を変える
+		if($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>7) {
+			echo ' class="col-red"';
+		} elseif ($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>5) {
+			echo ' class="col-yellow"';
+		} elseif ($stuff['Stuff']['cat_id']==='2' && $stuff['Stuff']['pastdates']>1) {
+			echo ' class="col-red"';
+		} elseif ($stuff['Stuff']['cat_id']==='2' && $stuff['Stuff']['pastdates']>2) {
+			echo ' class="col-yellow"';
+		} else {
+			echo ' class="col-green"';
 		} ?>>
 			<?php
-			if($stuff['Stuff']['pastdates']>14) {
+			// 野菜　経過日数＞5
+			// 肉　経過日数＞2　警告
+			if($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>10) {
 				echo '😭 ';
-			} elseif ($stuff['Stuff']['pastdates']>7) {
+			} elseif ($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>7) {
 				echo '😞 ';
-			} elseif ($stuff['Stuff']['pastdates']>5) {
-				echo '😖 ';
+			} elseif ($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>4) {
+				echo '😑 ';
+			} elseif ($stuff['Stuff']['cat_id']==='2' && $stuff['Stuff']['pastdates']>5) {
+				echo '😭 ';
+			} elseif ($stuff['Stuff']['cat_id']==='2' && $stuff['Stuff']['pastdates']>2) {
+				echo '😞 ';
+			} elseif ($stuff['Stuff']['cat_id']==='2' && $stuff['Stuff']['pastdates']>0) {
+				echo '😑 ';
+			} else {
+				echo '😄 ';
 			}
 			echo h($stuff['Stuff']['pastdates']); ?>
 		&nbsp;</td>

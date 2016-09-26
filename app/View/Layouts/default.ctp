@@ -35,13 +35,18 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	<link href="https://fonts.googleapis.com/css?family=Leckerli+One" rel="stylesheet">
+	<link rel="icon shortcut" href="./_favicon.ico" type="image/x-icon">
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?><span class="d-iblock f-right"><a href="http://localhost/ihav_cake/users/logout">logout</a></span></h1>
 		</div>
 		<div id="content">
+			<header>
+				<h2 class="logo ff-en"><a href="http://localhost/ihav_cake/">I hav</a></h2>
+			</header>
 
 			<?php echo $this->Flash->render(); ?>
 

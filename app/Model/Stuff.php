@@ -66,6 +66,16 @@ class Stuff extends AppModel {
 	);
 
 /**
+ * Who is own this stuff?
+ *
+ * return: $stuff, $user
+ */
+    public function isOwnedBy($stuff, $user) {
+        return $this->field('id', array('id' => $stuff, 'user_id' => $user)) !== false;
+        //
+    }
+
+/**
  * How many days did it pass?
  *
  * if it was 'modified' before 'today', then update DB.
