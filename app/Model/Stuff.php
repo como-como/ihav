@@ -62,7 +62,14 @@ class Stuff extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)
+		),
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'user_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        )
 	);
 
 /**
@@ -70,11 +77,12 @@ class Stuff extends AppModel {
  *
  * return: $stuff, $user
  */
+/*
     public function isOwnedBy($stuff, $user) {
         return $this->field('id', array('id' => $stuff, 'user_id' => $user)) !== false;
         //
     }
-
+*/
 /**
  * How many days did it pass?
  *

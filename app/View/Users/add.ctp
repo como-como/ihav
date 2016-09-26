@@ -10,7 +10,7 @@
 		));
 		echo $this->Form->input('role', array(
 			'options' => array('normal' => '一般', 'admin' => '管理者'),
-			'label' => '属性'
+			'label' => '権限'
 		));
 		?>
 	</fieldset>

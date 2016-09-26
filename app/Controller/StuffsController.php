@@ -18,11 +18,12 @@ class StuffsController extends AppController {
 	public $components = array('Paginator' => array(
         //'limit' => 20,
         'order' => array('Stuff.date' => 'asc')
-    ), 'Session', 'Flash');
+    ), 'Session', 'Flash', 'Auth');
 
 /**
  * Authorize
  */
+/*
     public function isAuthorized($user) {
         // 登録済ユーザーは投稿できる
         if ($this->action === 'add') {
@@ -32,6 +33,8 @@ class StuffsController extends AppController {
         // 投稿のオーナーは編集や削除ができる
         if (in_array($this->action, array('edit', 'delete'))) {
             $stuffId = (int) $this->request->params['pass'][0];
+            $this->log('stuffId: '.$this->request->params['pass'][0], 'debug');
+            $this->log('userid: '.$user['id'], 'debug');
             if ($this->Post->isOwnedBy($stuffId, $user['id'])) {
                 return true;
             }
@@ -39,6 +42,7 @@ class StuffsController extends AppController {
 
         return parent::isAuthorized($user);
     }
+*/
 
 /**
  * index method
@@ -48,8 +52,16 @@ class StuffsController extends AppController {
 	public function index() {
 		$this->Stuff->recursive = 0;
 
-        $data = $this->Stuff->find('all');
-        //$this->log('data: '. print_r($data) ,'debug');
+        //$data = $this->Stuff->find('all');
+        $uid = $this->Stuff->find('first', array(
+            'fields' => array('id'),
+            'conditions' => array('username' => $this->viewVars['user']['User']['username'])
+        ));
+        /*
+        $data = $this->Stuff->find('all', array(
+            'conditions' => array('username' => 'users.'.$this->Auth->user('id'))
+        ));*/
+        $this->log("uid:". pr($this->Auth->user()), 'debug');
 
         //update pastDates
         foreach($data as $key => $value){

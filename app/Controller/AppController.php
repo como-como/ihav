@@ -39,21 +39,23 @@ class AppController extends Controller {
                 'action' => 'index'
             ),
             'logoutRedirect' => array(
-                'controller' => 'stuffs',
+                'controller' => 'users',
                 //'action' => 'display',
                 //'home'
-                'action' => 'index'
+                'action' => 'login'
             ),
+            /*
             'authenticate' => array(
                 'Form' => array(
                     'passwordHasher' => 'Blowfish'
                 )
-            ),
-            'authorize' => array('Controller')
+            ),*/
+            //'authorize' => array('Controller')
         )
     );
 
-    public function isAuthorized($user) {
+    //権限による振り分け
+/*    public function isAuthorized($user) {
         // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
@@ -62,9 +64,10 @@ class AppController extends Controller {
         // デフォルトは拒否
         return false;
     }
+*/
 
-    //アカウントがなくても内容を見ることができる
     public function beforeFilter() {
         //$this->Auth->allow('index', 'view');
+        $this->set('user', $this->Auth->user());
     }
 }

@@ -1,9 +1,9 @@
 <div class="stuffs index">
-	<h2><?php echo __('Stuffs'); ?></h2>
+	<!--<h2><?php //echo __('買ったもの一覧'); ?></h2>-->
 	<table cellpadding="0" cellspacing="0">
 	<thead>
 	<tr>
-			<th><?php echo $this->Paginator->sort('cat_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('cat_id','分類'); ?></th>
 			<th><?php echo $this->Paginator->sort('detail_id','買ったもの'); ?></th>
 			<th><?php echo $this->Paginator->sort('amount','数'); ?></th>
 			<th><?php echo $this->Paginator->sort('unit','単位'); ?></th>
