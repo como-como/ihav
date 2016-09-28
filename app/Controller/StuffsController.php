@@ -72,7 +72,7 @@ class StuffsController extends AppController {
         $option = array(
             'user_id' => $this->Auth->user('id')
         );
-        debugger::dump($option);
+        //debugger::dump($option);
 
         //$this->set('stuffs', $this->Paginator->paginate());
         if($this->Auth->user('role')==='admin') {
@@ -94,7 +94,7 @@ class StuffsController extends AppController {
 			throw new NotFoundException(__('Invalid stuff'));
 		}
 		$options = array('conditions' => array('Stuff.' . $this->Stuff->primaryKey => $id));
-		$this->set('stuff', $this->Stuff->find('first', $options));
+		$this->set('stuffs', $this->Stuff->find('first', $options));
 	}
 
 /**
@@ -105,8 +105,10 @@ class StuffsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Stuff->create();
+
             //ユーザ名を保存する
-            $this->request->data['Post']['user_id'] = $this->Auth->user('id');
+            $this->request->data['Stuff']['user_id'] = $this->Auth->user('id');
+
 			if ($this->Stuff->save($this->request->data)) {
 				$this->Flash->success(__('買ったものを登録しました。'));
 				return $this->redirect(array('action' => 'index'));

@@ -28,6 +28,8 @@
 			'label' => '買ったお店',
 			'class' => 'input_l'
 		));
+
+		debugger::dump($user_id);
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

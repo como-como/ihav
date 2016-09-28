@@ -41,6 +41,12 @@ class Stuff extends AppModel {
                 'rule' => array('numeric'),
             ),
         ),
+        'user_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'required' => true
+            ),
+        ),
 	);
 
 /**
