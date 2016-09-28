@@ -50,6 +50,10 @@ class DetailsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Detail->create();
+
+            //ユーザidも登録する
+            $this->request->data['Stuff']['user_id'] = $this->Auth->user('id');
+
 			if ($this->Detail->save($this->request->data)) {
 				$this->Flash->success(__('The detail has been saved.'));
 				return $this->redirect(array('action' => 'index'));

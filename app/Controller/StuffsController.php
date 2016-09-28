@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+
 /**
  * Stuffs Controller
  *
@@ -19,7 +20,6 @@ class StuffsController extends AppController {
         //'limit' => 20,
         'order' => array('Stuff.date' => 'asc')
     ), 'Session', 'Flash', 'Auth');
-
 /**
  * Authorize
  */
@@ -52,11 +52,10 @@ class StuffsController extends AppController {
 	public function index() {
 		$this->Stuff->recursive = 0;
 
-        $data = $this->Stuff->find('all', array(
-            'conditions' => array('user_id' => $this->Auth->user('id'))
-        ));
-
         //経過日数を再計算
+        $data = $this->Stuff->find('all', array(
+            'conditions' => array('Stuff.user_id' => $this->Auth->user('id'))
+        ));
         foreach($data as $key => $value){
             $today = date('y-m-d');
             $modified = substr($value['Stuff']['modified'], 0, 10);
@@ -106,8 +105,15 @@ class StuffsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Stuff->create();
 
-            //ユーザ名を保存する
+
+            //ユーザidも登録する
             $this->request->data['Stuff']['user_id'] = $this->Auth->user('id');
+
+
+            //Price->lowerPrice を実行
+            $this->loadModel('Price');
+            $result = $this->Price->lowerPrice($this->request->data);
+            debugger::dump($result);
 
 			if ($this->Stuff->save($this->request->data)) {
 				$this->Flash->success(__('買ったものを登録しました。'));
@@ -133,6 +139,9 @@ class StuffsController extends AppController {
 			throw new NotFoundException(__('Invalid stuff'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+            //ユーザidも登録する
+            $this->request->data['Stuff']['user_id'] = $this->Auth->user('id');
 
             //for compare date and edited date
             $sort = array_fill_keys(array('year', 'month', 'day'), null);

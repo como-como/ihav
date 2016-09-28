@@ -135,3 +135,9 @@ q:after  { content: close-quote }
 .col-yellow { color: #ffa500; }
 .col-green { color: #38b48b; }
 .col-lgray { color: #ccc; }
+
+.bgcol-cat1 { background-color: #028760; }
+.bgcol-cat2 { background-color: #ed6d3d; }
+.bgcol-cat3 { background-color: #e95464; }
+.bgcol-cat4 { background-color: #82ae46; }
+.bgcol-cat5 { background-color: #98623c; }

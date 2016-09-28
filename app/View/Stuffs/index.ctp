@@ -39,7 +39,7 @@
 		// 経過日に応じて色を変える
 		if($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>7) {
 			echo ' class="col-red"';
-		} elseif ($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>5) {
+		} elseif ($stuff['Stuff']['cat_id']==='1' && $stuff['Stuff']['pastdates']>4) {
 			echo ' class="col-yellow"';
 		} elseif ($stuff['Stuff']['cat_id']==='2' && $stuff['Stuff']['pastdates']>1) {
 			echo ' class="col-red"';
@@ -94,12 +94,13 @@
 	</div>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<!--<h3><?php //echo __('Actions'); ?></h3>-->
 	<ul>
-		<li><?php echo $this->Html->link(__('New Stuff'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Cats'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cat'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Details'), array('controller' => 'details', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Detail'), array('controller' => 'details', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('買ったものを登録'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('種別を見る'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('種別追加'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('食材を見る'), array('controller' => 'details', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('食材追加'), array('controller' => 'details', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('そこねを見る'), array('controller' => 'prices', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

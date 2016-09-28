@@ -41,6 +41,12 @@ class Detail extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+        'user_id' => array(
+            'numeric' => array(
+                'rule' => array('numeric'),
+                'required' => true
+            ),
+        ),
 	);
 
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -78,7 +84,20 @@ class Detail extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
+		),
+        'Price' => array(
+            'className' => 'Price',
+            'foreignKey' => 'detail_id',
+            'dependent' => false,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => ''
+        )
 	);
 
 }
