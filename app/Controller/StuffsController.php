@@ -52,18 +52,11 @@ class StuffsController extends AppController {
 	public function index() {
 		$this->Stuff->recursive = 0;
 
-        //$data = $this->Stuff->find('all');
-        $uid = $this->Stuff->find('first', array(
-            'fields' => array('id'),
-            'conditions' => array('username' => $this->viewVars['user']['User']['username'])
-        ));
-        /*
         $data = $this->Stuff->find('all', array(
-            'conditions' => array('username' => 'users.'.$this->Auth->user('id'))
-        ));*/
-        $this->log("uid:". pr($this->Auth->user()), 'debug');
+            'conditions' => array('user_id' => $this->Auth->user('id'))
+        ));
 
-        //update pastDates
+        //経過日数を再計算
         foreach($data as $key => $value){
             $today = date('y-m-d');
             $modified = substr($value['Stuff']['modified'], 0, 10);
@@ -76,7 +69,17 @@ class StuffsController extends AppController {
             }
         }
 
-        $this->set('stuffs', $this->Paginator->paginate());
+        $option = array(
+            'user_id' => $this->Auth->user('id')
+        );
+        debugger::dump($option);
+
+        //$this->set('stuffs', $this->Paginator->paginate());
+        if($this->Auth->user('role')==='admin') {
+            $this->set('stuffs', $this->Paginator->paginate());
+        } else {
+            $this->set('stuffs', $this->Paginator->paginate($option));
+        }
 	}
 
 /**

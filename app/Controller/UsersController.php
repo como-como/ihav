@@ -61,15 +61,14 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             if(isset($this->data['User']['username']) && isset($this->data['User']['password'])){
                 // ログイン成功
-                if($this->Auth->login($this->data)){
+                //if($this->Auth->login($this->data)){
+                if($this->Auth->login()){
                     $this->Flash->success(__('ログインしました'));
-
-                    $this->set('user',$this->data['User']);
-
                     $this->redirect($this->Auth->redirect());
                     //$this->redirect('index');
                 }
                 else{
+                    $this->Flash->error(__('ログインできませんでした'));
                     // ログイン失敗
                 }
             }

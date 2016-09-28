@@ -68,6 +68,18 @@ class AppController extends Controller {
 
     public function beforeFilter() {
         //$this->Auth->allow('index', 'view');
+        $this->is_login = (bool)$this->Auth->user();
+        if ($this->is_login) {
+            $this->uid = $this->Auth->user('id');
+            $this->username = $this->Auth->user('username');
+        }
+        $this->set('is_login', $this->is_login);
+        $this->set('uid', $this->uid);
+        $this->set('username', $this->username);
+        parent::beforeFilter();
+
+
+
         $this->set('user', $this->Auth->user());
     }
 }
