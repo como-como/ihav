@@ -37,10 +37,10 @@
 	<ul>
 
 		<li><?php echo $this->Html->link(__('買ったものを見る'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('種別を見る'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('種別追加'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('食材を見る'), array('controller' => 'details', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('食材追加'), array('controller' => 'details', 'action' => 'add')); ?> </li>
+		<!--<li><?php //echo $this->Html->link(__('分類を見る'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
+		<li><?php //echo $this->Html->link(__('分類を種別追加'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
+		<li><?php //echo $this->Html->link(__('食材を見る'), array('controller' => 'details', 'action' => 'index')); ?> </li>-->
+		<li><?php echo $this->Html->link(__('食材を追加登録'), array('controller' => 'details', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('そこねを見る'), array('controller' => 'prices', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

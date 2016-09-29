@@ -15,7 +15,9 @@ class PricesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session', 'Flash', 'Auth');
+	public $components = array('Paginator' => array(
+        'order' => array('Detail.id' => 'asc')
+        ), 'Session', 'Flash', 'Auth');
 
 /**
  * index method

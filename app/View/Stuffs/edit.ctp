@@ -34,14 +34,16 @@
 <?php echo $this->Form->end(__('登録する')); ?>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<!--<h3><?php echo __('Actions'); ?></h3>-->
 	<ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Stuff.id')), array('confirm' => __('Are you sure you want to delete # %s?', $this->Form->value('Stuff.id')))); ?></li>
-		<li><?php echo $this->Html->link(__('List Stuffs'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Cats'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cat'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Details'), array('controller' => 'details', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Detail'), array('controller' => 'details', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Form->postLink(__('消す'), array('action' => 'delete', $this->Form->value('Stuff.id')), array('confirm' => __('本当に %s を消しますか？', $this->Form->value('Detail.name')))); ?></li>
+		<li><?php echo $this->Html->link(__('買ったものを見る'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('買ったものを登録'), array('action' => 'add')); ?></li>
+		<!--<li><?php //echo $this->Html->link(__('List Cats'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
+		<li><?php //echo $this->Html->link(__('New Cat'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
+		<li><?php //echo $this->Html->link(__('List Details'), array('controller' => 'details', 'action' => 'index')); ?> </li>-->
+		<li><?php echo $this->Html->link(__('食材を追加登録'), array('controller' => 'details', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('そこねを見る'), array('controller' => 'prices', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

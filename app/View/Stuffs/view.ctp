@@ -1,68 +1,54 @@
 <div class="stuffs view">
-<h2><?php echo __('Stuff'); ?></h2>
+<!--<h2><?php //echo __('買ったもの（詳細）'); ?></h2>-->
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
+		<!--<dt><?php //echo __('ID'); ?></dt>
 		<dd>
-			<?php echo h($stuff['Stuff']['id']); ?>
+			<?php //echo h($stuffs['Stuff']['id']); ?>
+			&nbsp;
+		</dd>-->
+		<dt><?php echo __('分類'); ?></dt>
+		<dd>
+			<?php echo $this->Html->link($stuffs['Cat']['cat_name'], array('controller' => 'cats', 'action' => 'view', $stuffs['Cat']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Cat'); ?></dt>
+		<dt><?php echo __('食材名'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($stuff['Cat']['id'], array('controller' => 'cats', 'action' => 'view', $stuff['Cat']['id'])); ?>
+			<?php echo $this->Html->link($stuffs['Detail']['name'], array('controller' => 'details', 'action' => 'view', $stuffs['Detail']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Detail'); ?></dt>
+		<dt><?php echo __('数量・単位'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($stuff['Detail']['name'], array('controller' => 'details', 'action' => 'view', $stuff['Detail']['id'])); ?>
+			<?php echo h($stuffs['Stuff']['amount'].$stuffs['Stuff']['unit']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Amount'); ?></dt>
+		<dt><?php echo __('買った日'); ?></dt>
 		<dd>
-			<?php echo h($stuff['Stuff']['amount']); ?>
+			<?php echo h(str_replace('-', '/', $stuffs['Stuff']['date'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Unit'); ?></dt>
+		<dt><?php echo __('価格'); ?></dt>
 		<dd>
-			<?php echo h($stuff['Stuff']['unit']); ?>
+			<?php echo h($stuffs['Stuff']['price'].'円'); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Date'); ?></dt>
+		<dt><?php echo __('買ったお店'); ?></dt>
 		<dd>
-			<?php echo h($stuff['Stuff']['date']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Price'); ?></dt>
-		<dd>
-			<?php echo h($stuff['Stuff']['price']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Store'); ?></dt>
-		<dd>
-			<?php echo h($stuff['Stuff']['store']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Created'); ?></dt>
-		<dd>
-			<?php echo h($stuff['Stuff']['created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
-		<dd>
-			<?php echo h($stuff['Stuff']['modified']); ?>
+			<?php echo h($stuffs['Stuff']['store']); ?>
 			&nbsp;
 		</dd>
 	</dl>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<!--<h3><?php //echo __('Actions'); ?></h3>-->
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Stuff'), array('action' => 'edit', $stuff['Stuff']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Stuff'), array('action' => 'delete', $stuff['Stuff']['id']), array('confirm' => __('Are you sure you want to delete # %s?', $stuff['Stuff']['id']))); ?> </li>
-		<li><?php echo $this->Html->link(__('List Stuffs'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Stuff'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cats'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cat'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Details'), array('controller' => 'details', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Detail'), array('controller' => 'details', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('編集する'), array('action' => 'edit', $stuffs['Stuff']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('削除する'), array('action' => 'delete', $stuffs['Stuff']['id']), array('confirm' => __('本当に %s を削除しますか？', $stuffs['Detail']['name']))); ?> </li>
+		<li><?php echo $this->Html->link(__('買ったものを見る'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('買ったものを登録'), array('action' => 'add')); ?> </li>
+		<!--<li><?php //echo $this->Html->link(__('List Cats'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
+		<li><?php //echo $this->Html->link(__('New Cat'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
+		<li><?php //echo $this->Html->link(__('List Details'), array('controller' => 'details', 'action' => 'index')); ?> </li>-->
+		<li><?php echo $this->Html->link(__('食材を追加登録'), array('controller' => 'details', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('そこねを見る'), array('controller' => 'prices', 'action' => 'index')); ?> </li>
 	</ul>
 </div>

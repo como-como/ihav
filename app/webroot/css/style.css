@@ -121,7 +121,13 @@ q:after  { content: close-quote }
 .f-left { float: left; }
 .f-right { float: right; }
 
+.f-normal {
+    font-weight: normal;
+    font-size: 1rem;
+}
+
 .m-center { margin: 0 auto; }
+.mt-1r { margin-top: 1rem; }
 .mr-0_2rem { margin-right: 0.2rem; }
 
 .fs-0_7rem { font-size: 0.7rem; }

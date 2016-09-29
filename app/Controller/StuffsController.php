@@ -17,7 +17,6 @@ class StuffsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator' => array(
-        //'limit' => 20,
         'order' => array('Stuff.date' => 'asc')
     ), 'Session', 'Flash', 'Auth');
 /**

@@ -40,24 +40,25 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?><span class="d-iblock f-right">
-					<?php
-					if(isset($user)) {
-						//echo '<a href="http://localhost/ihav_cake/users/logout">logout</a>';
-						echo $this->Html->link('ログアウト','/users/logout');
-					} else {
-						echo $this->Html->link('ログイン','/users/login');
-						echo '　';
-						echo $this->Html->link('ユーザ登録','/users/add');
-					}
-			?>
-			</span></h1>
-		</div>
+		<header>
+			<div id="header">
+				<!--<h1><?php //echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?>-->
+				<h1 class="logo ff-en"><a href="http://localhost/ihav_cake/">I hav</a><span class="d-iblock f-right f-normal">
+						<?php
+						if(isset($user)) {
+							//echo '<a href="http://localhost/ihav_cake/users/logout">logout</a>';
+							echo $this->Html->link('ログアウト','/users/logout');
+						} else {
+							echo $this->Html->link('ログイン','/users/login');
+							echo '　';
+							echo $this->Html->link('ユーザ登録','/users/add');
+						}
+				?>
+				</span></h1>
+			</div>
+		</header>
+
 		<div id="content">
-			<header>
-				<h2 class="logo ff-en"><a href="http://localhost/ihav_cake/">I hav</a></h2>
-			</header>
 
 			<?php echo $this->Flash->render(); ?>
 
